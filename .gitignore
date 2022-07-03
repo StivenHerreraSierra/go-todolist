@@ -1,0 +1,63 @@
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode
+
+### VisualStudioCode ###
+*/.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+*/.history/
+
+# Built Visual Studio Code Extensions
+*/*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+*/.history
+*/.ionide
+
+# Support for Project snippet scope
+.vscode/*.code-snippets
+
+# Ignore code-workspaces
+*.code-workspace
+
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
+
+.env
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+frontend/node_modules/*
+frontend/node_modules
+
+# Compiled output
+frontend/dist
+frontend/tmp
+frontend/out-tsc
+frontend/bazel-out
+
+# Visual Studio Code
+frontend/.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+frontend/.history/*
+
+# Miscellaneous
+frontend/.angular/cache
+frontend/.sass-cache/
+frontend/connect.lock
+frontend/coverage
+frontend/libpeerconnection.log
+testem.log
+frontend/typings
+
+# System files
+frontend/.DS_Store
+Thumbs.db
