@@ -1,1 +1,161 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --description-color: rgb(163, 163, 163);
+    --pending-color: rgb(240, 221, 49);
+    --finished-color: rgb(117, 218, 117);
+    --late-color: #F87474;
+    --primary-color: #3AB0FF;
+    --dark-blue: #267cb6;
+    --secondary-color: #FFB562;
+    --background-color: #F9F2ED;
+    --dark: rgba(37, 37, 37, 0.699);
+}
+
+* {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    padding: 20px;
+    background-color: var(--background-color);
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: scroll;
+}
+
+.title {
+    display: grid;
+    max-width: 20%;
+    grid-template-columns: 20px 90%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.title__line {
+    min-height: 0px;
+    max-height: 0px;
+    border: 1px solid var(--primary-color);
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 108px;
+    height: 32px;
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    padding: 3px 5px;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: none;
+    appearance: unset;
+    background-color: var(--background-color);
+    color: var(--dark-blue);
+    cursor: pointer;
+    z-index: 0;
+    position: relative;
+}
+.button::before, .button::after {
+    content: '';
+    position: absolute;
+    width: 108px;
+    height: 32px;
+    border-radius: 5px;
+    z-index: -1;
+    background-color: var(--background-color);
+    transition: 1s all ease;
+}
+.button:hover::before {
+    height: 0;
+}
+.button:hover::after {
+    width: 0;
+}
+.button__text {
+    font-size: 16px;
+    font-weight: bold;
+}
+/* Top bar */
+.top-container {
+    height: 50px;
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.top-container h1 {
+    font-size: 25px;
+}
+.top-container a {
+    font-weight: bold;
+    color: var(--background-color);
+}
+.top-container a:hover {
+    text-decoration: underline;
+    transition: 4s all ease;
+}
+
+/* Task item */
+.item-container {
+    box-shadow: 0px 0px 2px 0 rgba(151, 151, 151, 0.671), 0px 0px 3px 0 rgba(216, 216, 216, 0.678), 0px 0px 4px 0 rgba(243, 243, 243, 0.473);
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+.item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border-radius: 5px;
+}
+.item__icon, .item__info {
+    padding: 4px;
+}
+.item__icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px 0px 0px 5px;
+    color: rgb(43, 43, 43);
+}
+.item__info {
+    border-radius: 0px 5px 5px 0px;
+    padding-left: 8px;
+    background-color: whitesmoke;
+}
+.item__info > h3 {
+    max-width: fit-content;
+    background: linear-gradient(to left, whitesmoke 50%, var(--secondary-color) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    outline: none;
+}
+.item:hover > .item__info > h3 {
+    background-position: left bottom;
+    transition: all 0.5s ease;
+}
+.pendiente {
+    background-color: var(--pending-color);
+}
+.finalizada {
+    background-color: var(--finished-color);
+}
+.atrasada {
+    background-color: var(--late-color);
+}
+.descripcion {
+    color: var(--description-color);
+}
