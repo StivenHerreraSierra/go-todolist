@@ -1,0 +1,27 @@
+[
+    {
+        "task_code": 0,
+        "task_title": "Tarea #1",
+        "task_description": "Descripción de la tarea #1",
+        "task_start_date": "2022-07-03",
+        "task_due_date": "2022-07-05",
+        "task_status": "PENDIENTE",
+        "task_owner": "usuario@email.com"
+    },
+    {
+        "task_code": 1,
+        "task_title": "Tarea #2",
+        "task_start_date": "2022-07-08",
+        "task_due_date": "2022-07-10",
+        "task_status": "FINALIZADA",
+        "task_owner": "usuario@email.com"
+    },
+    {
+        "task_code": 2,
+        "task_title": "Tarea #3",
+        "task_start_date": "2022-07-04",
+        "task_due_date": "2022-07-06",
+        "task_status": "ATRASADA",
+        "task_owner": "usuario@email.com"
+    }
+]
