@@ -9,7 +9,7 @@ import (
 func InitRoutes(router *mux.Router) {
 	router.HandleFunc("/user", services.GetUser).Methods("GET")
 	router.HandleFunc("/user", services.SignUp).Methods("POST")
-	router.HandleFunc("/signin", services.SignIn).Methods("POST")
+	router.HandleFunc("/signin", services.SignIn).Methods("POST", "OPTIONS")
 
 	router.Handle("/task", auth.ValidateAndContinue(services.InsertTask)).Methods("POST")
 	router.Handle("/tasks", auth.ValidateAndContinue(services.GetAllTasks)).Methods("GET")

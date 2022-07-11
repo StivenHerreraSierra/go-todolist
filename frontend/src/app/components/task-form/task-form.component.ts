@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { task } from '../../models/task';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -19,7 +18,6 @@ export class TaskFormComponent implements OnInit {
     dueDate: [(new Date()).toLocaleDateString('sv'), this.presentOrFutureDate()]
   });
   
-  minDate!: Date;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +25,6 @@ export class TaskFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.minDate = new Date();
   }
 
   addTask() {

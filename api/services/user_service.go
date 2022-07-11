@@ -93,6 +93,13 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 }
 
 func SignIn(w http.ResponseWriter, r *http.Request) {
+	EnableCors(&w)
+
+	if r.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	var credential Credential
 
 	err := json.NewDecoder(r.Body).Decode(&credential)
@@ -142,12 +149,9 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.SetCookie(w, &http.Cookie{
-		Name:    "token",
-		Value:   token,
-		Expires: tokenExpirationTime,
-	})
+	http.SetCookie(w, auth.Cookie("token", token, tokenExpirationTime))
+	http.SetCookie(w, auth.Cookie("refresh-token", refreshToken, refreshExpirationTime))
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(responses.JsonTokenResponse(refreshToken))
+	w.Write(responses.JsonTokenResponse("Welcome"))
 }

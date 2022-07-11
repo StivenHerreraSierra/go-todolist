@@ -78,6 +78,18 @@ func ValidateAndContinue(handler func(w http.ResponseWriter, r *http.Request)) h
 	})
 }
 
+func Cookie(name string, value string, expirationTime time.Time) *http.Cookie {
+	return &http.Cookie{
+		Name:     name,
+		Value:    value,
+		Expires:  expirationTime,
+		Path:     "/",
+		HttpOnly: true,
+		SameSite: http.SameSiteNoneMode,
+		Secure:   true, //required by SameSite
+	}
+}
+
 func init() {
 	godotenv.Load()
 }

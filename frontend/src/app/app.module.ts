@@ -11,6 +11,9 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { AsideComponent } from './components/aside/aside.component';
+import { UserLoginFormComponent } from './components/user-login-form/user-login-form.component';
+import { HomeTaskComponent } from './modules/task/home-task/home-task.component';
+import { HomeUserComponent } from './modules/user/home-user/home-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,12 +22,16 @@ import { AsideComponent } from './components/aside/aside.component';
     TopBarComponent,
     ButtonComponent,
     TaskFormComponent,
-    AsideComponent
+    AsideComponent,
+    UserLoginFormComponent,
+    HomeTaskComponent,
+    HomeUserComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', component: TaskListComponent }
+      { path: '', component: HomeTaskComponent },
+      { path: 'login', component: HomeUserComponent }
     ]),
     ReactiveFormsModule,
     HttpClientModule
