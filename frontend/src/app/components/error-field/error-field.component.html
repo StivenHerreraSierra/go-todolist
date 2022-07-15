@@ -1,0 +1,7 @@
+<div class="input__error"
+    *ngIf="formField.invalid && (formField.dirty || formField.touched)">
+
+    <span *ngIf="formField.errors?.['required']">Required field</span>
+
+    <span *ngIf="formField.errors?.['email']">Incorrect email</span>
+</div>

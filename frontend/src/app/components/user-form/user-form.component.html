@@ -1,0 +1,13 @@
+<form method="dialog" class="login-form" (submit)="submit()">
+    <ng-content select="[title]"></ng-content>
+
+    <div class="form__fields">
+        <ng-content select="[fields]"></ng-content>
+    </div>
+
+    <p class="form__spacer"></p>
+
+    <div class="form__buttons">
+        <ng-content select="[buttons]"></ng-content>
+    </div>
+</form>

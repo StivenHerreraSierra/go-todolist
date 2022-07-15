@@ -1,0 +1,26 @@
+<app-user-form [formGroup]="signupForm" (submitEvent)="signUp()">
+    <h3 title class="form__title">Sign Up</h3>
+
+    <ng-container fields>
+        <app-text-field type="text" placeholder="First name" icon="person"
+            fieldName="firstname" [parentForm]="signupForm"
+            formControlName="firstname"></app-text-field>
+
+        <app-text-field type="text" placeholder="Last name" icon="badge"
+            fieldName="lastname" [parentForm]="signupForm"
+            formControlName="lastname"></app-text-field>
+
+        <app-text-field type="email" placeholder="Email" icon="mail"
+            fieldName="email" [parentForm]="signupForm" formControlName="email">
+        </app-text-field>
+
+        <app-text-field type="password" placeholder="Password" icon="lock"
+            fieldName="password" [parentForm]="signupForm"
+            formControlName="password"></app-text-field>
+    </ng-container>
+
+    <ng-container buttons>
+        <app-button text="Sign Up" class="full-size" type="submit"
+            classes="full-size large-button btn-submit"></app-button>
+    </ng-container>
+</app-user-form>
