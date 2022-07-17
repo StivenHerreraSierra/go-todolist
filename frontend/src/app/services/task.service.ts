@@ -23,7 +23,12 @@ export class TaskService {
   }
   
   getTasks() {
-    return this.http.get<Task[]>("/assets/tasks.json");
+    return this.http.get<Task[]>("http://localhost:8000/api/tasks", {
+      headers: {
+        'Content-type': 'application/json'
+      },
+      withCredentials: true
+    });
   }
 
   updateTask(code: number, updatedTask: Task) {

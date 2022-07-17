@@ -9,7 +9,7 @@ import (
 
 	"dev.com/web/database/repos"
 	"dev.com/web/models"
-	"dev.com/web/services/responses"
+	"dev.com/web/util/responses"
 	"github.com/gorilla/mux"
 )
 

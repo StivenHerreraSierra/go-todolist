@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { catchError } from 'rxjs';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class UserLoginFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +31,10 @@ export class UserLoginFormComponent implements OnInit {
       user_password: this.loginForm.get("password")?.value || ""
     })
       .subscribe({
-        next: res => console.log(res),
+        next: res => {
+          console.log(res);
+          this.router.navigate(['/']);
+        },
         error: err => console.error(err)
       })
   }

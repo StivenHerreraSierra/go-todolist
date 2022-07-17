@@ -1,22 +1,18 @@
 <div class="container">
-    <div
-        style="display: flex; flex-direction: column; justify-content: space-around; width: 80%; height: 50%; padding: 0 30px; box-sizing: border-box; backdrop-filter: blur(10px); background: #c2c2c23f; margin: 0 auto; align-self: center; text-align: center; border-radius: 10px;">
+    <div class="home-info">
         <div>
-            <h2
-                style="font-size: 60px; margin-bottom: 30px; font-family: 'Mukta', sans-serif; color: rgb(63, 62, 62)">
-                Golang ToDo</h2>
-            <p style="font-style: italic;">Make your life easier, write down
+            <h2 class="home-info__title">Golang ToDo</h2>
+            <p class="home-info__description">Make your life easier, write down
                 your next tasks and forget about having them on your mind all
                 day!</p>
         </div>
-        <div
-            style="display: flex; flex-direction: row; justify-content: center;">
+        <div class="home-info__buttons">
             <button (click)="openLogin()"
-                style="margin-right: 50px; height: 50px !important; width: 150px !important; font-size: 18px; font-weight: bold;"
-                class="button large-button btn-submit"> Login </button>
+                class="button large-button btn-submit modal-button"> Login
+            </button>
             <button (click)="openSignUp()"
-                style="height: 50px !important; width: 150px !important; font-size: 18px; font-weight: bold;"
-                class="button large-button btn-submit"> Sign Up </button>
+                class="button large-button btn-submit modal-button"> Sign Up
+            </button>
         </div>
     </div>
 </div>

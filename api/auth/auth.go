@@ -5,8 +5,9 @@ import (
 	"os"
 	"time"
 
-	"dev.com/web/services/responses"
-	"github.com/dgrijalva/jwt-go"
+	"dev.com/web/util/cors"
+	"dev.com/web/util/responses"
+	"github.com/golang-jwt/jwt"
 	"github.com/joho/godotenv"
 )
 
@@ -35,6 +36,13 @@ func SignToken(email string, expirationTime time.Time) (string, error) {
 
 func ValidateAndContinue(handler func(w http.ResponseWriter, r *http.Request)) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		cors.EnableCors(&w)
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
 		cookie, err := r.Cookie("token")
 
 		if err != nil {

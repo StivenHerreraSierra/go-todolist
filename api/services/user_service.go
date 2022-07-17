@@ -6,11 +6,12 @@ import (
 	"net/http"
 	"time"
 
+	"dev.com/web/auth"
 	"dev.com/web/database/repos"
 	"dev.com/web/models"
-	"dev.com/web/services/auth"
-	"dev.com/web/services/hash"
-	"dev.com/web/services/responses"
+	"dev.com/web/util/cors"
+	"dev.com/web/util/hash"
+	"dev.com/web/util/responses"
 )
 
 type getUserBody struct {
@@ -58,7 +59,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func SignUp(w http.ResponseWriter, r *http.Request) {
-	EnableCors(&w)
+	cors.EnableCors(&w)
 
 	if r.Method == "OPTIONS" {
 		w.WriteHeader(http.StatusOK)
@@ -107,7 +108,7 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 }
 
 func SignIn(w http.ResponseWriter, r *http.Request) {
-	EnableCors(&w)
+	cors.EnableCors(&w)
 
 	if r.Method == "OPTIONS" {
 		w.WriteHeader(http.StatusOK)
