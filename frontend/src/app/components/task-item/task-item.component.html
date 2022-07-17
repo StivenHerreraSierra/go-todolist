@@ -6,10 +6,12 @@
         <div class="item__info">
             <h3>{{ task?.task_title }}</h3>
             <p *ngIf="task.task_description">{{ task.task_description }}</p>
-            <p *ngIf="!task.task_description" class="descripcion">- {{ "No details" }} -</p>
+            <p *ngIf="!task.task_description" class="descripcion">- {{ "No
+                details" }} -</p>
         </div>
         <div class="item__events">
-            <app-button icon="delete" classes="rounded-button btn-remove"></app-button>
+            <app-button icon="delete" classes="rounded-button btn-remove"
+                (clicked)="delete(task.task_code)"></app-button>
         </div>
     </div>
 </div>

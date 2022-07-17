@@ -37,6 +37,11 @@ export class TaskService {
   }
 
   deleteTask(code: number) {
-    this.tasks = this.tasks.filter(t => t.task_code !== code);
+    return this.http.delete(`http://localhost:8000/api/task/remove/${code}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
   }
 }

@@ -50,6 +50,7 @@ body {
     border-left: 1px dashed var(--description-color);
     flex-grow: 0;
     margin-left: auto;
+    margin-top:  50px;
 }
 
 .section {
@@ -173,6 +174,8 @@ body {
     box-sizing: border-box;
     margin: 10px 0;
     padding-right: 10px;
+    background-color: whitesmoke;
+    border-radius: 5px;
 }
 .item {
     display: flex;

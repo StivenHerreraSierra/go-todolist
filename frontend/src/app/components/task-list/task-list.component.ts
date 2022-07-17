@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Event } from '@angular/router';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
 
@@ -20,5 +21,9 @@ export class TaskListComponent implements OnInit {
       .subscribe(
         (data: Task[]) => this.tasks = data
       );
+  }
+  
+  deleteTask(code: number) {
+    this.tasks = this.tasks.filter(t => t.task_code !== code);
   }
 }

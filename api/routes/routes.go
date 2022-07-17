@@ -14,5 +14,5 @@ func InitRoutes(router *mux.Router) {
 	router.Handle("/api/task", auth.ValidateAndContinue(services.InsertTask)).Methods("POST")
 	router.Handle("/api/tasks", auth.ValidateAndContinue(services.GetAllTasks)).Methods("GET", "OPTIONS")
 	router.Handle("/api/task", auth.ValidateAndContinue(services.UpdateTask)).Methods("PATCH")
-	router.Handle("/api/task/{task_id}", auth.ValidateAndContinue(services.DeleteTask)).Methods("DELETE")
+	router.Handle("/api/task/remove/{task_id}", auth.ValidateAndContinue(services.DeleteTask)).Methods("DELETE", "OPTIONS")
 }
