@@ -18,6 +18,7 @@ import { TextFieldComponent } from './components/text-field/text-field.component
 import { ErrorFieldComponent } from './components/error-field/error-field.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserSignupFormComponent } from './components/user-signup-form/user-signup-form.component';
+import { ModalComponent } from './components/modal/modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { UserSignupFormComponent } from './components/user-signup-form/user-sign
     ErrorFieldComponent,
     UserFormComponent,
     UserSignupFormComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
