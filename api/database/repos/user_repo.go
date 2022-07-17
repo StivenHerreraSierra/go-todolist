@@ -1,6 +1,7 @@
 package repos
 
 import (
+	"database/sql"
 	"fmt"
 
 	"dev.com/web/database/util"
@@ -21,14 +22,25 @@ func GetUser(email string) (models.User, error) {
 }
 
 func SignUp(user models.User) error {
-	err := util.GetUser.QueryRow(user.Email).Err()
+	var found models.User
+	err := util.GetUser.QueryRow(user.Email).Scan(
+		&found.First_name,
+		&found.Last_name,
+		&found.Email,
+		&found.Password,
+	)
 
-	if err == nil {
-		return fmt.Errorf("duplicated email")
+	if err == sql.ErrNoRows {
+		_, insertErr := util.SignUp.Exec(user.First_name, user.Last_name, user.Email, user.Password)
+
+		if insertErr != nil && insertErr.Error() == "sql: no rows in result set" {
+			return nil
+		}
+
+		return insertErr
 	}
 
-	_, err = util.SignUp.Exec(user.First_name, user.Last_name, user.Email, user.Password)
-	return err
+	return fmt.Errorf("duplicated email")
 }
 
 func ValidateLogin(email string) (string, error) {

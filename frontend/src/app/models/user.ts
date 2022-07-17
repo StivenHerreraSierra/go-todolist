@@ -1,6 +1,6 @@
 export interface User {
-    cedula: string,
-    first_name: string,
-    last_name: string,
-    email: string
+    user_first_name: string,
+    user_last_name: string,
+    user_email: string,
+    user_password: string
 }

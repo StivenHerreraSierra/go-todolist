@@ -58,6 +58,13 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func SignUp(w http.ResponseWriter, r *http.Request) {
+	EnableCors(&w)
+
+	if r.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	var userRequest models.User
 
 	err := json.NewDecoder(r.Body).Decode(&userRequest)
@@ -84,12 +91,19 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write(responses.ReportError("something goes wrong"))
+
+		if err.Error() == "duplicated email" {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write(responses.ReportError("email already registered, try another"))
+		} else {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write(responses.ReportError("something goes wrong"))
+		}
 		return
 	}
 
 	w.WriteHeader(http.StatusCreated)
+	w.Write(responses.ReportMessage("New user was created"))
 }
 
 func SignIn(w http.ResponseWriter, r *http.Request) {
@@ -153,5 +167,5 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, auth.Cookie("refresh-token", refreshToken, refreshExpirationTime))
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(responses.JsonTokenResponse("Welcome"))
+	w.Write(responses.ReportMessage("Logged user"))
 }

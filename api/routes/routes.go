@@ -7,12 +7,12 @@ import (
 )
 
 func InitRoutes(router *mux.Router) {
-	router.HandleFunc("/user", services.GetUser).Methods("GET")
-	router.HandleFunc("/user", services.SignUp).Methods("POST")
-	router.HandleFunc("/signin", services.SignIn).Methods("POST", "OPTIONS")
+	router.HandleFunc("/api/user", services.GetUser).Methods("GET")
+	router.HandleFunc("/api/user/signup", services.SignUp).Methods("POST", "OPTIONS")
+	router.HandleFunc("/api/user/login", services.SignIn).Methods("POST", "OPTIONS")
 
-	router.Handle("/task", auth.ValidateAndContinue(services.InsertTask)).Methods("POST")
-	router.Handle("/tasks", auth.ValidateAndContinue(services.GetAllTasks)).Methods("GET")
-	router.Handle("/task", auth.ValidateAndContinue(services.UpdateTask)).Methods("PATCH")
-	router.Handle("/task/{task_id}", auth.ValidateAndContinue(services.DeleteTask)).Methods("DELETE")
+	router.Handle("/api/task", auth.ValidateAndContinue(services.InsertTask)).Methods("POST")
+	router.Handle("/api/tasks", auth.ValidateAndContinue(services.GetAllTasks)).Methods("GET")
+	router.Handle("/api/task", auth.ValidateAndContinue(services.UpdateTask)).Methods("PATCH")
+	router.Handle("/api/task/{task_id}", auth.ValidateAndContinue(services.DeleteTask)).Methods("DELETE")
 }
