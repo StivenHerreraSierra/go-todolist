@@ -38,8 +38,8 @@ import { ModalComponent } from './components/modal/modal.component';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', component: HomeTaskComponent },
-      { path: 'login', component: HomeUserComponent }
+      { path: '', component: HomeUserComponent },
+      { path: 'tasks', component: HomeTaskComponent }
     ]),
     ReactiveFormsModule,
     HttpClientModule

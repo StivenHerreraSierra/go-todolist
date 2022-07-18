@@ -39,15 +39,8 @@ export class TaskFormComponent implements OnInit {
       task_owner: ""
     };
     
-    this.taskService.addTask(newTask).subscribe({
-      next: res => {
-        console.log(res);
-        this.insertEvent.emit(res);
-        this.clear();
-      },
-      error: err => console.error(err)
-    });
-    
+    this.taskService.addTask(newTask).subscribe();
+
     this.clear();
   }
 

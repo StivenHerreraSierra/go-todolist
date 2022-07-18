@@ -14,7 +14,7 @@ export class UserSignupFormComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5)]]
+      password: ['', Validators.required]
     }
   );
 
@@ -35,4 +35,7 @@ export class UserSignupFormComponent implements OnInit {
     }).subscribe(res => console.log(res));
   }
 
+  get isValid() {
+    return this.signupForm.valid;
+  }
 }

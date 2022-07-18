@@ -1,40 +1,50 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task';
-import { Subject } from 'rxjs';
+import { map, Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  //tasks = new Subject<Task[]>();
-  tasks: Task[] = []
-  
+  private tasks: Task[] = [];
+  tasksSubject = new Subject<Task[]>();
+ 
   constructor(
     private http: HttpClient
   ) { }
 
+  watch(): Observable<Task[]> {
+    return this.tasksSubject.asObservable();
+  }
+
   addTask(task: Task) {
-    return this.http.post("http://localhost:8000/api/task/new", task, {
+    return this.http.post<Task>("http://localhost:8000/api/task/new", task, {
       headers: {
         'Content-Type': 'application/json'
       },
       withCredentials: true
-    });
+    }).pipe(
+      map( (data: Task) => {
+        this.tasks = [...this.tasks, data];
+        this.tasksSubject.next(this.tasks);
+      })
+    );
   }
 
-  getTask(code: number) {
-    return this.tasks.filter(t => t.task_code === code);
-  }
-  
   getTasks() {
     return this.http.get<Task[]>("http://localhost:8000/api/tasks", {
       headers: {
         'Content-type': 'application/json'
       },
       withCredentials: true
-    });
+    }).pipe(
+      map( (data: Task[]) => {
+          this.tasks = data;
+          this.tasksSubject.next(this.tasks);
+        })
+      );
   }
 
   updateTask(code: number, updatedTask: Task) {
@@ -48,6 +58,11 @@ export class TaskService {
         'Content-Type': 'application/json'
       },
       withCredentials: true
-    })
+    }).pipe(
+      map(() => {
+        this.tasks = this.tasks.filter(t => t.task_code !== code);
+        this.tasksSubject.next(this.tasks);
+      })
+    )
   }
 }

@@ -21,6 +21,10 @@
 
     <ng-container buttons>
         <app-button text="Sign Up" class="full-size" type="submit"
-            classes="full-size large-button btn-submit"></app-button>
+            [disabled]="!isValid" classes="full-size large-button btn-submit">
+        </app-button>
     </ng-container>
+
+    <p details class="form__details--error" *ngIf="!isValid">Please fill all the
+        fields</p>
 </app-user-form>

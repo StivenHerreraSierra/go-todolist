@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
 
@@ -9,20 +10,16 @@ import { TaskService } from '../../services/task.service';
 })
 export class TaskListComponent implements OnInit {
 
-  @Input() tasks: Task[] = [];
+  tasks: Task[] = [];
+  tasksObs$?: Observable<Task[]>;
   
   constructor(
     private taskService: TaskService
   ) { }
 
   ngOnInit(): void {
-    this.taskService.getTasks()
-      .subscribe(
-        (data: Task[]) => this.tasks = data
-      );
-  }
-  
-  deleteTask(code: number) {
-    this.tasks = this.tasks.filter(t => t.task_code !== code);
+    this.tasksObs$ = this.taskService.watch();
+    this.tasksObs$.subscribe(tasks => this.tasks = tasks);
+    this.taskService.getTasks().subscribe();
   }
 }

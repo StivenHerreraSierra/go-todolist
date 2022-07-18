@@ -38,4 +38,8 @@ export class UserLoginFormComponent implements OnInit {
         error: err => console.error(err)
       })
   }
+  
+  get isValid(): boolean {
+    return this.loginForm.valid;
+  }
 }

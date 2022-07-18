@@ -20,14 +20,6 @@ export class TaskItemComponent implements OnInit {
   }
 
   delete(code: number) {
-    this.taskService.deleteTask(code).subscribe({
-      next: res => {
-        console.log(res);
-        this.deleteEvent.emit(code);
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
+      this.taskService.deleteTask(code).subscribe();
   }
 }

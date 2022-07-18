@@ -80,13 +80,7 @@ body {
     grid-column: span 2;
 }
 
-.btn-submit {
-    background-color: var(--primary-color);
-}
-.btn-remove {
-    background-color: var(--late-color);
-}
-
+/* Buttons */
 .button {
     display: flex;
     flex-direction: row;
@@ -104,32 +98,39 @@ body {
     position: relative;
     border: none;
 }
+.button:disabled {
+    background-image: var(--description-color);
+    border: none;
+    cursor: not-allowed;
+}
+.btn-submit {
+    background-image: linear-gradient(-180deg, var(--primary-color) 100%, var(--dark-blue) 0%);
+    border: 1px solid var(--dark-blue);
+}
+.btn-submit::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    border-radius: 5px;
+    background-image: linear-gradient(-180deg, var(--primary-color) 0%, var(--dark-blue) 100%);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.2s ease-in-out;
+    -webkit-transition: opacity 0.2s ease-in-out;
+}
+.btn-submit:enabled:hover:after {
+    opacity: 1;
+}
+.btn-remove {
+    background-color: var(--late-color);
+}
 .large-button {
     min-width: 108px;
     height: 32px;
-    border: 1px solid var(--dark);
     border-radius: 5px;
-}
-.btn-submit::before, .btn-submit::after {
-    background-color: var(--primary-color);
-}
-.btn-remove::before, .btn-remove::after {
-    background-color: var(--late-color);
-}
-.large-button::before, .large-button::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 32px;
-    border-radius: 5px;
-    z-index: -1;
-    transition: 1s all ease;
-}
-.large-button:hover::before {
-    height: 0;
-}
-.large-button:hover::after {
-    width: 0;
 }
 .rounded-button {
     width: 40px;
@@ -269,6 +270,11 @@ body {
 }
 textarea {
     resize: none;
+}
+.form__details--error {
+    color: var(--late-color);
+    text-align: center;
+    font-size: 12px;
 }
 
 /* Login form */
