@@ -57,6 +57,7 @@ body {
     padding: 0 10px;
     flex-grow: 1;
     box-sizing: border-box;
+    margin-top: 50px;
 }
 
 .title {

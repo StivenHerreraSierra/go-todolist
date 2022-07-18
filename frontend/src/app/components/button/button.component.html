@@ -1,4 +1,5 @@
-<button [type]="type || 'button'" [class]="'button ' + classes" (click)="click()">
+<button [type]="type || 'button'" [class]="'button ' + classes"
+    (click)="click()" [disabled]="disabled">
     <span class="button__text" *ngIf="text">{{ text }}</span>
     <i class="material-icons button__icon" *ngIf="icon">{{ icon }}</i>
 </button>

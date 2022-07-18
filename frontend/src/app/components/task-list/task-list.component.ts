@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Event } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
 
@@ -10,7 +9,7 @@ import { TaskService } from '../../services/task.service';
 })
 export class TaskListComponent implements OnInit {
 
-  tasks: Task[] = [];
+  @Input() tasks: Task[] = [];
   
   constructor(
     private taskService: TaskService

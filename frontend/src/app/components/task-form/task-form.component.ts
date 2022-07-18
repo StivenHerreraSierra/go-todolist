@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -11,6 +11,7 @@ export class TaskFormComponent implements OnInit {
 
   @Input() formMethod!: string;
   @Input() title!: string;
+  @Output() insertEvent = new EventEmitter();
   
   insertTask = this.formBuilder.group({
     title: ['', [Validators.required, Validators.maxLength(26)]],
@@ -32,16 +33,25 @@ export class TaskFormComponent implements OnInit {
       task_code: -1,
       task_title: this.insertTask.get('title')?.value || "",
       task_description: this.insertTask.get('description')?.value || "",
-      task_start: (function (today: Date) { return today.toISOString().split('T')[0]})(new Date),
-      task_due: (function (today: Date) { return today.toISOString().split('T')[0]})(new Date(this.insertTask.get('dueDate')?.value || Date.now())),
+      task_start: (new Date()).toLocaleDateString('sv'),
+      task_due: this.insertTask.get('dueDate')?.value || "",
       task_status: "PENDIENTE",
       task_owner: ""
     };
     
-    this.taskService.addTask(newTask);
+    this.taskService.addTask(newTask).subscribe({
+      next: res => {
+        console.log(res);
+        this.insertEvent.emit(res);
+        this.clear();
+      },
+      error: err => console.error(err)
+    });
+    
+    this.clear();
   }
 
-  cancel() {
+  clear() {
     this.insertTask.reset();
   }
 

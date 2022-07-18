@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  tasks: Task[] = [];
+  //tasks = new Subject<Task[]>();
+  tasks: Task[] = []
   
   constructor(
     private http: HttpClient
   ) { }
 
   addTask(task: Task) {
-    this.tasks.push(task);
-    console.log(this.tasks);
+    return this.http.post("http://localhost:8000/api/task/new", task, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    });
   }
 
   getTask(code: number) {
