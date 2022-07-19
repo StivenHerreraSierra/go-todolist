@@ -33,7 +33,7 @@ export class UserLoginFormComponent implements OnInit {
       .subscribe({
         next: res => {
           console.log(res);
-          this.router.navigate(['/']);
+          this.router.navigate(['/tasks']);
         },
         error: err => console.error(err)
       })

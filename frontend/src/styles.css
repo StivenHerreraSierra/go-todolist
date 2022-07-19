@@ -62,10 +62,9 @@ body {
 
 .title {
     display: grid;
-    max-width: 20%;
+    max-width: 50%;
     grid-template-columns: 20px 90%;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 20px;
 }
 .title__line {
@@ -233,6 +232,7 @@ body {
     display: grid;
     grid-template-columns: 30% 70%;
     grid-row-gap: 10px;
+    grid-column-gap: 5px;
     padding: 10px 20px;
     min-width: fit-content;
     background-color: var(--white-form);

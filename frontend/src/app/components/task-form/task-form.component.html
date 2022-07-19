@@ -2,9 +2,9 @@
     (ngSubmit)="addTask()">
     <h3 class="form__title">{{ title }}</h3>
 
-    <label for="title" class="form__label">Title *</label>
+    <label for="title" class="form__label">Title * </label>
     <input type="text" id="title" class="form__input" formControlName="title"
-        autofocus required />
+        required />
     <div class="form__error"
         *ngIf="insertTask.get('title')?.invalid && (insertTask.get('title')?.dirty || insertTask.get('title')?.touched)">
         <span *ngIf="insertTask.get('title')?.errors?.['required']">Title is
@@ -13,11 +13,11 @@
             26 chars.</span>
     </div>
 
-    <label for="description" class="form__label">Description</label>
+    <label for="description" class="form__label">Description </label>
     <textarea id="description" class="form__input" formControlName="description"
         rows="4" maxlength="88"></textarea>
 
-    <label for="dueDate" class="form__label">Due date *</label>
+    <label for="dueDate" class="form__label">Due date * </label>
     <input type="date" id="dueDate" class="form__input"
         formControlName="dueDate" required />
     <div class="form__error"
