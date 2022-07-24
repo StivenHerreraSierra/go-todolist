@@ -8,10 +8,14 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, switchMap, throwError, from, map } from 'rxjs';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+  ) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -41,6 +45,7 @@ export class AuthInterceptor implements HttpInterceptor {
           return from(this.userService.refresh()).pipe(
             switchMap(() => next.handle(request.clone())),
             catchError((refreshErr: HttpErrorResponse) => {
+	      this.authService.logout();
               return throwError(() => refreshErr);
             })
           );

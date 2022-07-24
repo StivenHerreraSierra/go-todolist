@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../models/task';
 import { TaskService } from 'src/app/services/task.service';
+import {catchError} from 'rxjs';
 
 @Component({
   selector: 'app-task-item',
@@ -20,6 +21,8 @@ export class TaskItemComponent implements OnInit {
   }
 
   delete(code: number) {
-      this.taskService.deleteTask(code).subscribe();
+      this.taskService.deleteTask(code).subscribe({
+        error: (err => console.error("Error deleting:", err))
+      });
   }
 }

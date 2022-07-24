@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task';
-import { map, Subject, Observable, catchError } from 'rxjs';
+import { map, Subject, Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -45,10 +45,7 @@ export class TaskService {
 	  console.log(this.tasks);
           this.tasksSubject.next(this.tasks);
         }),
-	catchError(err => {
-          console.log(err);
-	  return err;
-	})
+	catchError(err => throwError(() => err))
       );
   }
 
@@ -67,7 +64,8 @@ export class TaskService {
       map(() => {
         this.tasks = this.tasks.filter(t => t.task_code !== code);
         this.tasksSubject.next(this.tasks);
-      })
+      }),
+      catchError(err => throwError(() => err))
     )
   }
 }

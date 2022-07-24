@@ -19,6 +19,8 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserSignupFormComponent } from './components/user-signup-form/user-signup-form.component';
 import { ModalComponent } from './components/modal/modal.component';
 import {AuthInterceptor} from './interceptors/auth-interceptor.interceptor';
+import {AuthService} from './services/auth.service';
+import {AuthGuard} from './auth/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,7 @@ import {AuthInterceptor} from './interceptors/auth-interceptor.interceptor';
     BrowserModule,
     RouterModule.forRoot([
       { path: '', component: HomeUserComponent },
-      { path: 'tasks', component: HomeTaskComponent }
+      { path: 'tasks', component: HomeTaskComponent, canActivate: [AuthGuard] }
     ]),
     ReactiveFormsModule,
     HttpClientModule
@@ -50,7 +52,9 @@ import {AuthInterceptor} from './interceptors/auth-interceptor.interceptor';
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: AuthInterceptor
-    }
+    },
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

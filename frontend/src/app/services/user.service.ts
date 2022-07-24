@@ -37,7 +37,6 @@ export class UserService {
   }
 
   refresh() {
-    console.log('Refresh service');
     return this.http.post('http://localhost:8000/api/user/refresh', {}, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
