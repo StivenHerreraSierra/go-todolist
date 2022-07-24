@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
@@ -18,6 +18,7 @@ import { ErrorFieldComponent } from './components/error-field/error-field.compon
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserSignupFormComponent } from './components/user-signup-form/user-signup-form.component';
 import { ModalComponent } from './components/modal/modal.component';
+import {AuthInterceptor} from './interceptors/auth-interceptor.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,13 @@ import { ModalComponent } from './components/modal/modal.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: AuthInterceptor
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

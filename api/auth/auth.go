@@ -47,12 +47,13 @@ func ValidateAndContinue(handler func(w http.ResponseWriter, r *http.Request)) h
 
 		if err != nil {
 			if err == http.ErrNoCookie {
+				w.WriteHeader(http.StatusUnauthorized)
 				w.Write(responses.ReportError("jwt token not found. " + err.Error()))
 			} else {
+				w.WriteHeader(http.StatusInternalServerError)
 				w.Write(responses.ReportError("error: " + err.Error()))
 			}
 
-			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 
@@ -96,6 +97,23 @@ func Cookie(name string, value string, expirationTime time.Time) *http.Cookie {
 		SameSite: http.SameSiteNoneMode,
 		Secure:   true, //required by SameSite
 	}
+}
+
+func ParseTokenWithClaims(jwtTokenString string) (*jwt.Token, *Claims, error) {
+	claims := &Claims{}
+	token, err := jwt.ParseWithClaims(jwtTokenString, claims, func(t *jwt.Token) (interface{}, error) {
+		return []byte(os.Getenv("SECRET")), nil
+	})
+
+	return token, claims, err
+}
+
+func ParseToken(jwtTokenString string) (*jwt.Token, error) {
+	token, err := jwt.Parse(jwtTokenString, func(t *jwt.Token) (interface{}, error) {
+		return []byte(os.Getenv("SECRET")), nil
+	})
+
+	return token, err
 }
 
 func init() {

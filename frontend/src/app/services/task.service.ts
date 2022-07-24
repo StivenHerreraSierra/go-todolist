@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task';
-import { map, Subject, Observable } from 'rxjs';
+import { map, Subject, Observable, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -40,10 +40,15 @@ export class TaskService {
       },
       withCredentials: true
     }).pipe(
-      map( (data: Task[]) => {
+        map((data: Task[]) => {
           this.tasks = data;
+	  console.log(this.tasks);
           this.tasksSubject.next(this.tasks);
-        })
+        }),
+	catchError(err => {
+          console.log(err);
+	  return err;
+	})
       );
   }
 
