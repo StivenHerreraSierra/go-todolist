@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticated: boolean = false;
-
   constructor(
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) { }
 
-  login = () => this.isAuthenticated = true;
+  login() {
+    this.cookieService.set('isAuth', 'true', { path: "/" });
+  }
 
-  logout = () => {
+  logout() {
     this.router.navigate(['/']);
-    this.isAuthenticated = false;
+    this.cookieService.set('isAuth', 'false', { path: "/" });
   };
 
-  isAuth = () => this.isAuthenticated;
+  isAuth = () => this.cookieService.get('isAuth');
 }
