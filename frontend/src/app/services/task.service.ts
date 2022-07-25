@@ -68,4 +68,19 @@ export class TaskService {
       catchError(err => throwError(() => err))
     )
   }
+
+  finishTask(code: number) {
+    return this.http.patch<Task>(`http://localhost:8000/api/task/finish/${code}`, {}, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    }).pipe(
+      map((data: Task) => {
+        const index = this.tasks.findIndex(t => t.task_code == code);
+	this.tasks[index].task_status = data.task_status;
+      }),
+      catchError(err => throwError(() => err))
+    );
+  }
 }

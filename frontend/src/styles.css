@@ -126,6 +126,9 @@ body {
 .btn-remove {
     background-color: var(--late-color);
 }
+.btn-green {
+    background-color: rgb(105, 194, 105);
+}
 .large-button {
     min-width: 108px;
     height: 32px;
@@ -212,8 +215,12 @@ body {
     transition: all 0.5s ease;
 }
 .item__events {
+    display: flex;
     align-self: center;
     margin-left: auto;
+}
+.item__events > :first-child {
+    margin-right: 5px;
 }
 .pendiente {
     background-color: var(--pending-color);

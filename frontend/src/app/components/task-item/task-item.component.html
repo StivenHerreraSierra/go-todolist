@@ -10,6 +10,9 @@
                 details" }} -</p>
         </div>
         <div class="item__events">
+            <app-button icon="done" classes="rounded-button btn-green"
+		(clicked)="finish(task.task_code)"
+		*ngIf="task.task_status !== 'FINALIZADA'"></app-button>
             <app-button icon="delete" classes="rounded-button btn-remove"
                 (clicked)="delete(task.task_code)"></app-button>
         </div>

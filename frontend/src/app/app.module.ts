@@ -21,7 +21,9 @@ import { UserSignupFormComponent } from './components/user-signup-form/user-sign
 import { ModalComponent } from './components/modal/modal.component';
 import {AuthInterceptor} from './interceptors/auth-interceptor.interceptor';
 import {AuthService} from './services/auth.service';
-import {AuthGuard} from './auth/auth.guard';
+import { LoginGuard} from './auth/login.guard';
+import { TasksGuard } from './auth/tasks.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,8 +44,8 @@ import {AuthGuard} from './auth/auth.guard';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', component: HomeUserComponent },
-      { path: 'tasks', component: HomeTaskComponent, canActivate: [AuthGuard] }
+      { path: '', component: HomeUserComponent, canActivate: [LoginGuard] },
+      { path: 'tasks', component: HomeTaskComponent, canActivate: [TasksGuard] }
     ]),
     ReactiveFormsModule,
     HttpClientModule
@@ -55,7 +57,8 @@ import {AuthGuard} from './auth/auth.guard';
       useClass: AuthInterceptor
     },
     AuthService,
-    AuthGuard,
+    LoginGuard,
+    TasksGuard,
     CookieService
   ],
   bootstrap: [AppComponent]

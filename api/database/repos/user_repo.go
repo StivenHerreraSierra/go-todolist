@@ -49,3 +49,4 @@ func ValidateLogin(email string) (string, error) {
 
 	return password, err
 }
+

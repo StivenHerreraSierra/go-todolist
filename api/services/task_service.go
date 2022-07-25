@@ -160,3 +160,37 @@ func DeleteTask(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 }
+
+func FinishTask(w http.ResponseWriter, r *http.Request) {
+    email := r.Header.Get("email")
+    strTaskId := mux.Vars(r)["task_id"]
+    taskId, err := strconv.Atoi(strTaskId)
+
+    if err != nil {
+        log.Println(err)
+        w.WriteHeader(http.StatusInternalServerError)
+        w.Write(responses.ReportError("something goes wrong"))
+        return
+    }
+
+    updated, err := repos.FinishTask(email, taskId)
+
+    if err != nil {
+        log.Println(err)
+	w.WriteHeader(http.StatusInternalServerError)
+	w.Write(responses.ReportError("something goes wrong"))
+	return
+    }
+
+    jsonResponse, jsonError := json.Marshal(updated)
+
+    if jsonError != nil {
+        log.Println(err)
+	w.WriteHeader(http.StatusInternalServerError)
+	w.Write(responses.ReportError("something goes wrong"))
+	return
+    }
+
+    w.WriteHeader(http.StatusOK)
+    w.Write(jsonResponse)
+}

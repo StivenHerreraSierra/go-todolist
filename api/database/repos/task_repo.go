@@ -146,3 +146,21 @@ func DeleteTask(userEmail string, taskCode int) error {
 
 	return err
 }
+
+func FinishTask(userEmail string, taskCode int) (models.Task, error) {
+    var task models.Task
+
+    foundTask, err := GetTask(taskCode)
+
+    if err != nil {
+        return task, err
+    }
+
+    if foundTask.User != userEmail {
+        return task, fmt.Errorf("the user is not the owner of the task")
+    }
+
+    foundTask.Status = "FINALIZADA"
+
+    return UpdateTask(userEmail, foundTask)
+}

@@ -172,6 +172,14 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 	w.Write(responses.ReportMessage("Logged user"))
 }
 
+func Logout(w http.ResponseWriter, r *http.Request) {
+	tokenExpirationTime := time.Now().Add(1)
+	refreshExpirationTime := time.Now().Add(1)
+
+	http.SetCookie(w, auth.Cookie("token", "", tokenExpirationTime))
+	http.SetCookie(w, auth.Cookie("refresh-token", "", refreshExpirationTime))
+}
+
 func RefreshToken(w http.ResponseWriter, r *http.Request) {
 	cors.EnableCors(&w)
 
