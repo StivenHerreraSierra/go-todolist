@@ -1,33 +1,40 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ModalService } from 'src/app/services/modal.service';
 import { Task } from '../../models/task';
-import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-task-item',
   templateUrl: './task-item.component.html',
-  styleUrls: ['./task-item.component.css']
+  styleUrls: ['./task-item.component.css'],
 })
 export class TaskItemComponent implements OnInit {
-
   @Input() task: Task | undefined;
   @Output() deleteEvent = new EventEmitter<number>();
+  @Output() finishEvent = new EventEmitter<number>();
+  @Output() editEvent = new EventEmitter<Task>();
 
-  constructor(
-    private taskService: TaskService,
-  ) { }
+  $updateTaskModal?: Observable<boolean>;
+  updateTaskModalService: ModalService = new ModalService();
+
+  constructor() {}
 
   ngOnInit(): void {
+    this.$updateTaskModal = this.updateTaskModalService.watch();
   }
 
-  delete(code: number) {
-    this.taskService.deleteTask(code).subscribe({
-      error: (err => console.error("Error deleting:", err))
-    });
+  openUpdateModal = () => this.updateTaskModalService.open();
+
+  edit(updatedTask: Task) {
+    this.editEvent.emit(updatedTask);
+    this.updateTaskModalService.close();
   }
 
   finish(code: number) {
-    this.taskService.finishTask(code).subscribe({
-      error: (err => console.error("Error finishing:", err))
-    });
+    this.finishEvent.emit(code);
+  }
+
+  delete(code: number) {
+    this.deleteEvent.emit(code);
   }
 }

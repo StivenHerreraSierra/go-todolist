@@ -1,37 +1,50 @@
-<form [method]="formMethod" [formGroup]="insertTask" class="form"
-    (ngSubmit)="addTask()">
-    <h3 class="form__title">{{ title }}</h3>
+<app-user-form [formGroup]="insertTask" (submitEvent)="submit()">
+  <h3 title class="form__title">{{ title }}</h3>
 
-    <label for="title" class="form__label">Title * </label>
-    <input type="text" id="title" class="form__input" formControlName="title"
-        required />
-    <div class="form__error"
-        *ngIf="insertTask.get('title')?.invalid && (insertTask.get('title')?.dirty || insertTask.get('title')?.touched)">
-        <span *ngIf="insertTask.get('title')?.errors?.['required']">Title is
-            required</span>
-        <span *ngIf="insertTask.get('title')?.errors?.['maxlength']">Limited to
-            26 chars.</span>
-    </div>
+  <ng-container fields>
+    <app-text-field
+      type="text"
+      placeholder="Title *"
+      icon="title"
+      formControlName="title"
+      fieldName="title"
+      [parentForm]="insertTask"
+    >
+    </app-text-field>
 
-    <label for="description" class="form__label">Description </label>
-    <textarea id="description" class="form__input" formControlName="description"
-        rows="4" maxlength="88"></textarea>
+    <app-text-area-field
+      placeholder="Description *"
+      icon="description"
+      formControlName="description"
+      fieldName="description"
+      [parentForm]="insertTask"
+      [rows]="maxRows"
+      [cols]="maxCols"
+    >
+    </app-text-area-field>
 
-    <label for="dueDate" class="form__label">Due date * </label>
-    <input type="date" id="dueDate" class="form__input"
-        formControlName="dueDate" required />
-    <div class="form__error"
-        *ngIf="insertTask.get('dueDate')?.invalid && (insertTask.get('dueDate')?.dirty || insertTask.get('dueDate')?.touched)">
-        <span
-            *ngIf="insertTask.get('dueDate')?.errors?.['presentOrFuture']">Present
-            or future date</span>
-    </div>
+    <app-text-field
+      type="date"
+      placeholder="dueDate"
+      icon="calendar_month"
+      formControlName="dueDate"
+      fieldName="dueDate"
+      [parentForm]="insertTask"
+    >
+    </app-text-field>
+  </ng-container>
 
-    <div class="form__buttons">
-        <app-button text="Add Task" type="submit"
-            classes="large-button btn-submit">
-        </app-button>
-        <app-button text="Clear" classes="large-button btn-remove"
-            (clicked)="clear()"></app-button>
-    </div>
-</form>
+  <ng-container buttons>
+    <app-button
+      [text]="getEvent"
+      type="submit"
+      classes="large-button btn-submit"
+    >
+    </app-button>
+    <app-button
+      text="Clear"
+      classes="large-button btn-remove"
+      (clicked)="clear()"
+    ></app-button>
+  </ng-container>
+</app-user-form>

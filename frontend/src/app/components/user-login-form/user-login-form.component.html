@@ -1,23 +1,40 @@
 <app-user-form [formGroup]="loginForm" (submitEvent)="login()">
-    <h3 title class="form__title">Login</h3>
+  <h3 title class="form__title">Login</h3>
 
-    <ng-container fields>
-        <app-text-field type="email" placeholder="Email" icon="mail"
-            formControlName="email" fieldName="email" [parentForm]="loginForm">
-        </app-text-field>
+  <ng-container fields>
+    <app-text-field
+      type="email"
+      placeholder="Email"
+      icon="mail"
+      formControlName="email"
+      fieldName="email"
+      [parentForm]="loginForm"
+    >
+    </app-text-field>
 
-        <app-text-field type="password" placeholder="Password" icon="lock"
-            formControlName="password" fieldName="password"
-            [parentForm]="loginForm">
-        </app-text-field>
-    </ng-container>
+    <app-text-field
+      type="password"
+      placeholder="Password"
+      icon="lock"
+      formControlName="password"
+      fieldName="password"
+      [parentForm]="loginForm"
+    >
+    </app-text-field>
+  </ng-container>
 
-    <ng-container buttons>
-        <app-button class="full-size" type="submit" [disabled]="!isValid"
-            classes="full-size large-button btn-submit" text="Login">
-        </app-button>
-    </ng-container>
+  <ng-container buttons>
+    <app-button
+      class="full-size"
+      type="submit"
+      [disabled]="!isValid"
+      classes="full-size large-button btn-submit"
+      text="Login"
+    >
+    </app-button>
+  </ng-container>
 
-    <p details class="form__details--error" *ngIf="!isValid">Please fill all the
-        fields</p>
+  <p details class="form__details--error" *ngIf="!isValid">
+    Please fill all the fields
+  </p>
 </app-user-form>

@@ -1,7 +1,29 @@
-<div class="title">
+<div class="list-header">
+  <div class="title">
     <div class="title__line"></div>
     <h2>Task List</h2>
+  </div>
+
+  <app-button
+    type="button"
+    text="Add Task"
+    classes="large-button btn-submit"
+    (clicked)="openAddTaskModal()"
+  ></app-button>
 </div>
 
-<app-task-item *ngFor="let task of tasks" [task]="task">
+<app-task-item
+  *ngFor="let task of tasks"
+  [task]="task"
+  (editEvent)="editTask($event)"
+  (deleteEvent)="deleteTask($event)"
+  (finishEvent)="finishTask($event)"
+>
 </app-task-item>
+
+<app-modal
+  *ngIf="$addTaskModal | async as showAddTask"
+  [modalService]="addTaskModalService"
+>
+<app-task-form title="Add Task" formMethod="POST" event="add" (submitEvent)="addTask($event)"></app-task-form>
+</app-modal>

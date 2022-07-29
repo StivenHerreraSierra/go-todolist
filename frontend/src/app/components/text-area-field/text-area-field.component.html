@@ -1,22 +1,23 @@
 <div class="input__container">
   <div class="input">
-    <span class="input__icon"
-      ><i class="material-icons material-symbols-sharp" *ngIf="icon">
+    <span class="input__icon">
+      <i class="material-icons material-symbols-sharp" *ngIf="icon">
         {{ icon }}
-      </i></span
-    >
-    <input
+      </i>
+    </span>
+
+    <textarea
       class="input__field"
-      [type]="type"
       [placeholder]="placeholder"
       [title]="title"
       [value]="value"
       [name]="fieldName"
+      [rows]="rows"
+      [cols]="cols"
       (input)="onChangeHandler($event)"
       (blur)="onTouched()"
-    />
+    ></textarea>
   </div>
 
   <app-error-field [formField]="formField"></app-error-field>
 </div>
-

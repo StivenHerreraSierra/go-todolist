@@ -1,27 +1,39 @@
 <div class="container">
-    <div class="home-info">
-        <div>
-            <h2 class="home-info__title">Golang ToDo</h2>
-            <p class="home-info__description">Make your life easier, write down
-                your next tasks and forget about having them on your mind all
-                day!</p>
-        </div>
-        <div class="home-info__buttons">
-            <button (click)="openLogin()"
-                class="button large-button btn-submit modal-button"> Login
-            </button>
-            <button (click)="openSignUp()"
-                class="button large-button btn-submit modal-button"> Sign Up
-            </button>
-        </div>
+  <div class="home-info">
+    <div>
+      <h2 class="home-info__title">Golang ToDo</h2>
+      <p class="home-info__description">
+        Make your life easier, write down your next tasks and forget about
+        having them on your mind all day!
+      </p>
     </div>
+    <div class="home-info__buttons">
+      <button
+        (click)="openLogin()"
+        class="button large-button btn-submit modal-button"
+      >
+        Login
+      </button>
+      <button
+        (click)="openSignUp()"
+        class="button large-button btn-submit modal-button"
+      >
+        Sign Up
+      </button>
+    </div>
+  </div>
 </div>
-<app-modal *ngIf="$loginModal | async as showLogin"
-    [modalService]="loginModalService">
-    <app-user-login-form></app-user-login-form>
+<app-modal
+  *ngIf="$loginModal | async as showLogin"
+  [modalService]="loginModalService"
+>
+  <app-user-login-form></app-user-login-form>
 </app-modal>
 
-<app-modal *ngIf="$signUpModal | async as showSignUp"
-    [modalService]="signUpModalService">
-    <app-user-signup-form></app-user-signup-form>
+<app-modal
+  *ngIf="$signUpModal | async as showSignUp"
+  [modalService]="signUpModalService"
+>
+  <app-user-signup-form></app-user-signup-form>
 </app-modal>
+

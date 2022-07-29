@@ -5,5 +5,4 @@ export interface Task {
     task_start: string,
     task_due: string,
     task_status: string,
-    task_owner: string
 }

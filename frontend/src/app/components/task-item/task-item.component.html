@@ -1,20 +1,68 @@
 <div class="item-container">
-    <div class="item" *ngIf="task">
-        <div [class]="'item__icon ' + task.task_status.toLowerCase()">
-            <i class="material-icons">assignment</i>
-        </div>
-        <div class="item__info">
-            <h3>{{ task?.task_title }}</h3>
-            <p *ngIf="task.task_description">{{ task.task_description }}</p>
-            <p *ngIf="!task.task_description" class="descripcion">- {{ "No
-                details" }} -</p>
-        </div>
-        <div class="item__events">
-            <app-button icon="done" classes="rounded-button btn-green"
-		(clicked)="finish(task.task_code)"
-		*ngIf="task.task_status !== 'FINALIZADA'"></app-button>
-            <app-button icon="delete" classes="rounded-button btn-remove"
-                (clicked)="delete(task.task_code)"></app-button>
-        </div>
+  <div class="item" *ngIf="task">
+    <div [class]="'item__icon ' + task.task_status.toLowerCase()">
+      <i class="material-icons">assignment</i>
     </div>
+    <div class="item__info" style="position: relative">
+      <span
+        style="
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          margin-bottom: 7px;
+          box-sizing: border-box;
+          height: 26px;
+        "
+      >
+        <h3>{{ task?.task_title }}</h3>
+
+        <span
+          style="
+            display: block;
+            border: 1px solid cyan;
+            border-radius: 10px;
+            max-width: fit-content;
+            box-sizing: border-box;
+            padding: 2px;
+            margin-left: 10px;
+            font-size: 12px;
+            background-color: cyan;
+          "
+          >{{ task.task_due }}</span
+        >
+      </span>
+
+      <p *ngIf="task.task_description" class="descripcion">
+        {{ task.task_description }}
+      </p>
+      <p *ngIf="!task.task_description" class="no-descripcion">
+        - {{ "No details" }} -
+      </p>
+    </div>
+    <div class="item__events">
+      <app-button
+        icon="edit"
+        classes="rounded-button btn-green"
+	(clicked)="openUpdateModal()"
+      ></app-button>
+      <app-button
+        icon="done"
+        classes="rounded-button btn-green"
+        (clicked)="finish(task.task_code)"
+        *ngIf="task.task_status !== 'FINALIZADA'"
+      ></app-button>
+      <app-button
+        icon="delete"
+        classes="rounded-button btn-remove"
+        (clicked)="delete(task.task_code)"
+      ></app-button>
+    </div>
+  </div>
 </div>
+
+<app-modal
+  *ngIf="$updateTaskModal | async as showUpdateTask"
+  [modalService]="updateTaskModalService"
+>
+<app-task-form [task]="task" event="update" title="Update Task" (submitEvent)="edit($event)"></app-task-form>
+</app-modal>

@@ -23,6 +23,8 @@ import {AuthInterceptor} from './interceptors/auth-interceptor.interceptor';
 import {AuthService} from './services/auth.service';
 import { LoginGuard} from './auth/login.guard';
 import { TasksGuard } from './auth/tasks.guard';
+import { TextAreaFieldComponent } from './components/text-area-field/text-area-field.component';
+import { TaskUpdateFormComponent } from './components/task-update-form/task-update-form.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { TasksGuard } from './auth/tasks.guard';
     UserFormComponent,
     UserSignupFormComponent,
     ModalComponent,
+    TextAreaFieldComponent,
+    TaskUpdateFormComponent,
   ],
   imports: [
     BrowserModule,
