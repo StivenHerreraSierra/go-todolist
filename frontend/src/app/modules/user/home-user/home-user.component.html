@@ -27,13 +27,12 @@
   *ngIf="$loginModal | async as showLogin"
   [modalService]="loginModalService"
 >
-  <app-user-login-form></app-user-login-form>
+  <app-user-login-form (loginEvent)="login($event)"></app-user-login-form>
 </app-modal>
 
 <app-modal
   *ngIf="$signUpModal | async as showSignUp"
   [modalService]="signUpModalService"
 >
-  <app-user-signup-form></app-user-signup-form>
+  <app-user-signup-form (signEvent)="signUp($event)"></app-user-signup-form>
 </app-modal>
-
