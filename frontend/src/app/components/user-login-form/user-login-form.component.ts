@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import {Credentials} from 'src/app/models/credentials';
+import { Credentials } from 'src/app/models/credentials';
 
 @Component({
   selector: 'app-user-login-form',
@@ -23,7 +23,8 @@ export class UserLoginFormComponent implements OnInit {
 
   login() {
     this.userCredentials.user_email = this.loginForm.get('email')?.value || '';
-    this.userCredentials.user_password = this.loginForm.get('password')?.value || '';
+    this.userCredentials.user_password =
+      this.loginForm.get('password')?.value || '';
 
     this.loginEvent.emit(this.userCredentials);
   }
