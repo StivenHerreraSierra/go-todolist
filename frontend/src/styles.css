@@ -257,7 +257,7 @@ body {
 .item__events * {
   margin-right: 5px;
 }
-.item__events:nth-last-child() {
+.item__events:nth-last-child(1) {
   margin-right: 0;
 }
 .pendiente {

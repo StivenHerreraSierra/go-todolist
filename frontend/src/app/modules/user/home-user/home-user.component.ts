@@ -40,7 +40,6 @@ export class HomeUserComponent implements OnInit {
       next: () => {
         this.authService.login();
         this.router.navigate(['/tasks']);
-        this.toast.showSuccessfulAlert('Login Successful');
       },
       error: (err) => {
         const { error } = err;

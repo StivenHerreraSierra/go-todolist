@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task';
+import { AuthService } from 'src/app/services/auth.service';
 import { TaskService } from 'src/app/services/task.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home-task',
@@ -11,7 +14,10 @@ import { ToastService } from 'src/app/services/toast.service';
 export class HomeTaskComponent implements OnInit {
   constructor(
     private taskService: TaskService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private userService: UserService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -72,6 +78,23 @@ export class HomeTaskComponent implements OnInit {
       error: (err) => {
         const { error } = err;
         this.toastService.showErrorAlert('Error Closing', error.error);
+      },
+    });
+  }
+
+  logout() {
+    this.userService.logout().subscribe({
+      next: () => {
+        this.authService.logout();
+        this.router.navigate(['/']);
+        this.toastService.showSuccessfulAlert(
+          'Successful Logout',
+          'Goodbye, see you soon.'
+        );
+      },
+      error: (err) => {
+        const { error } = err;
+        this.toastService.showErrorAlert('Error Logout', error.error);
       },
     });
   }

@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable, switchMap, throwError, from, map } from 'rxjs';
+import { catchError, Observable, switchMap, throwError, from } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 
@@ -45,7 +45,9 @@ export class AuthInterceptor implements HttpInterceptor {
           return from(this.userService.refresh()).pipe(
             switchMap(() => next.handle(request.clone())),
             catchError((refreshErr: HttpErrorResponse) => {
+              this.userService.logout();	
               this.authService.logout();
+              console.log(refreshErr);
               return throwError(() => refreshErr);
             })
           );

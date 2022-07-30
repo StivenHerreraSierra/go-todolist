@@ -9,7 +9,7 @@ export class ToastService {
 
   private TOAST = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'bottom',
     timer: 3000,
     timerProgressBar: true,
     showConfirmButton: false,

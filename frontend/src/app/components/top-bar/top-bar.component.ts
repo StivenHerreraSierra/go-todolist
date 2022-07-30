@@ -6,13 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  addTask() {
-    console.log("Add Task Event");
-  }
+  ngOnInit(): void {}
 }

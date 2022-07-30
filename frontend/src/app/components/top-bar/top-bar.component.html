@@ -3,8 +3,15 @@
     <a routerLink="/">Golang ToDoList</a>
   </h1>
 
-  <a href="https://github.com/StivenHerreraSierra/go-todolist" target="blank" class="link">
-    <img src="assets/github.png" title="GO to GitHub" class="link__image" />
-  </a>
-</div>
+  <div class="item__events">
+    <a
+      href="https://github.com/StivenHerreraSierra/go-todolist"
+      target="blank"
+      class="link"
+    >
+      <img src="assets/github.png" title="GO to GitHub" class="link__image" />
+    </a>
 
+    <ng-content options></ng-content>
+  </div>
+</div>
