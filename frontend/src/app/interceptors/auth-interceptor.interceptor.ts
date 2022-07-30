@@ -14,7 +14,7 @@ import { AuthService } from '../services/auth.service';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private userService: UserService,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   intercept(
@@ -45,7 +45,7 @@ export class AuthInterceptor implements HttpInterceptor {
           return from(this.userService.refresh()).pipe(
             switchMap(() => next.handle(request.clone())),
             catchError((refreshErr: HttpErrorResponse) => {
-	      this.authService.logout();
+              this.authService.logout();
               return throwError(() => refreshErr);
             })
           );

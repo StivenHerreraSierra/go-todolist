@@ -52,12 +52,15 @@ export class HomeUserComponent implements OnInit {
   signUp(user: User) {
     this.userService.signUp(user).subscribe({
       next: () => {
-	this.toast.showSuccessfulAlert('Sign Up Successful', 'Now you can login.');
+        this.toast.showSuccessfulAlert(
+          'Sign Up Successful',
+          'Now you can login.'
+        );
       },
       error: (err) => {
         const { error } = err;
-	this.toast.showErrorAlert('Sign Up Error', error.error);
-      }
+        this.toast.showErrorAlert('Sign Up Error', error.error);
+      },
     });
   }
 }

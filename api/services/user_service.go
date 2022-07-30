@@ -194,7 +194,7 @@ func RefreshToken(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		if err == http.ErrNoCookie {
-			w.Write(responses.ReportError("refresh token not found " + err.Error()))
+			w.Write(responses.ReportError("session expired"))
 		} else {
 			w.Write(responses.ReportError(err.Error()))
 		}

@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ModalService } from '../../services/modal.service';
 import { Task } from '../../models/task';
@@ -23,6 +18,8 @@ export class TaskListComponent implements OnInit {
 
   @Output() addEvent = new EventEmitter();
   @Output() editEvent = new EventEmitter();
+  @Output() deleteEvent = new EventEmitter();
+  @Output() finishEvent = new EventEmitter();
 
   constructor(private taskService: TaskService) {}
 
@@ -44,15 +41,11 @@ export class TaskListComponent implements OnInit {
   }
 
   deleteTask(code: number) {
-    this.taskService.deleteTask(code).subscribe({
-      error: (err) => console.error('Error deleting:', err),
-    });
+    this.deleteEvent.emit(code);
   }
 
   finishTask(code: number) {
-    this.taskService.finishTask(code).subscribe({
-      error: (err) => console.error('Error finishing:', err),
-    });
+    this.finishEvent.emit(code);
   }
 
   openAddTaskModal = () => this.addTaskModalService.open();
