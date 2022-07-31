@@ -4,6 +4,7 @@ import { Credentials } from '../models/credentials';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
 import {catchError, map, throwError} from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class UserService {
 
   login(credentials: Credentials) {
     return this.http.post(
-      'https://golangtodo-api.herokuapp.com/api/user/login',
+      `${environment.apiUrl}/api/user/login`,
       JSON.stringify(credentials),
       {
         headers: new HttpHeaders({
@@ -29,7 +30,7 @@ export class UserService {
   signUp(user: User) {
     console.log(user);
     return this.http.post(
-      'https://golangtodo-api.herokuapp.com/api/user/signup',
+      `${environment.apiUrl}/api/user/signup`,
       JSON.stringify(user),
       {
         headers: new HttpHeaders({
@@ -42,7 +43,7 @@ export class UserService {
 
   refresh() {
     return this.http.post(
-      'https://golangtodo-api.herokuapp.com/api/user/refresh',
+      `${environment.apiUrl}/api/user/refresh`,
       {},
       {
         headers: new HttpHeaders({
@@ -54,7 +55,7 @@ export class UserService {
   }
 
   logout() {
-    return this.http.post('http://localhost:8000/api/user/logout', {}, {
+    return this.http.post(`${environment.apiUrl}/api/user/logout`, {}, {
       headers: {
         'Content-Type': 'application/json'
       },

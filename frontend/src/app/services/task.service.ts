@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task';
 import { map, Subject, Observable, catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class TaskService {
 
   addTask(task: Task) {
     return this.http
-      .post<Task>('https://golangtodo-api.herokuapp.com/api/task/new', task, {
+      .post<Task>(`${environment.apiUrl}/api/task/new`, task, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -35,7 +36,7 @@ export class TaskService {
 
   getTasks() {
     return this.http
-      .get<Task[]>('https://golangtodo-api.herokuapp.com/api/tasks', {
+      .get<Task[]>(`${environment.apiUrl}/api/tasks`, {
         headers: {
           'Content-type': 'application/json',
         },
@@ -53,7 +54,7 @@ export class TaskService {
 
   updateTask(task: Task) {
     return this.http
-      .patch<Task>('https://golangtodo-api.herokuapp.com/api/task/update', task, {
+      .patch<Task>(`${environment.apiUrl}/api/task/update`, task, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -73,7 +74,7 @@ export class TaskService {
 
   deleteTask(code: number) {
     return this.http
-      .delete(`https://golangtodo-api.herokuapp.com/api/task/remove/${code}`, {
+      .delete(`${environment.apiUrl}/api/task/remove/${code}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -91,7 +92,7 @@ export class TaskService {
   finishTask(code: number) {
     return this.http
       .patch<Task>(
-        `https://golangtodo-api.herokuapp.com/api/task/finish/${code}`,
+        `${environment.apiUrl}/api/task/finish/${code}`,
         {},
         {
           headers: {
