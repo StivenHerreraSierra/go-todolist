@@ -18,7 +18,7 @@ export class TaskService {
 
   addTask(task: Task) {
     return this.http
-      .post<Task>('http://localhost:8000/api/task/new', task, {
+      .post<Task>('https://golangtodo-api.herokuapp.com/api/task/new', task, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -35,7 +35,7 @@ export class TaskService {
 
   getTasks() {
     return this.http
-      .get<Task[]>('http://localhost:8000/api/tasks', {
+      .get<Task[]>('https://golangtodo-api.herokuapp.com/api/tasks', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -53,7 +53,7 @@ export class TaskService {
 
   updateTask(task: Task) {
     return this.http
-      .patch<Task>('http://localhost:8000/api/task/update', task, {
+      .patch<Task>('https://golangtodo-api.herokuapp.com/api/task/update', task, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -73,7 +73,7 @@ export class TaskService {
 
   deleteTask(code: number) {
     return this.http
-      .delete(`http://localhost:8000/api/task/remove/${code}`, {
+      .delete(`https://golangtodo-api.herokuapp.com/api/task/remove/${code}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -91,7 +91,7 @@ export class TaskService {
   finishTask(code: number) {
     return this.http
       .patch<Task>(
-        `http://localhost:8000/api/task/finish/${code}`,
+        `https://golangtodo-api.herokuapp.com/api/task/finish/${code}`,
         {},
         {
           headers: {

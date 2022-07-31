@@ -13,7 +13,7 @@ export class UserService {
 
   login(credentials: Credentials) {
     return this.http.post(
-      'http://localhost:8000/api/user/login',
+      'https://golangtodo-api.herokuapp.com/api/user/login',
       JSON.stringify(credentials),
       {
         headers: new HttpHeaders({
@@ -29,7 +29,7 @@ export class UserService {
   signUp(user: User) {
     console.log(user);
     return this.http.post(
-      'http://localhost:8000/api/user/signup',
+      'https://golangtodo-api.herokuapp.com/api/user/signup',
       JSON.stringify(user),
       {
         headers: new HttpHeaders({
@@ -42,7 +42,7 @@ export class UserService {
 
   refresh() {
     return this.http.post(
-      'http://localhost:8000/api/user/refresh',
+      'https://golangtodo-api.herokuapp.com/api/user/refresh',
       {},
       {
         headers: new HttpHeaders({
