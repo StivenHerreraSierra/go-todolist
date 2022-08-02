@@ -13,7 +13,7 @@ var UpdateTask *sql.Stmt
 var DeleteTask *sql.Stmt
 
 func prepareGetAllTasks() error {
-	GetAllTasks, err = Database.Prepare("SELECT code, title, description, start_date, due_date, status, user_owner FROM task WHERE user_owner = ?")
+	GetAllTasks, err = Database.Prepare("SELECT code, title, description, start_date, due_date, status, user_owner FROM task WHERE user_owner = $1")
 
 	if err != nil {
 		return fmt.Errorf("error preparando consulta: %v", err)
@@ -23,13 +23,13 @@ func prepareGetAllTasks() error {
 }
 
 func prepareGetTask() error {
-	GetTask, err = Database.Prepare("Select code, title, description, start_date, due_date, status, user_owner FROM task WHERE code = ?")
+	GetTask, err = Database.Prepare("Select code, title, description, start_date, due_date, status, user_owner FROM task WHERE code = $1")
 
 	return err
 }
 
 func prepareInsertTask() error {
-	InsertTask, err = Database.Prepare("INSERT INTO task (title, description, start_date, due_date, status, user_owner) VALUES(?, ?, ?, ?, ?, ?)")
+	InsertTask, err = Database.Prepare("INSERT INTO task (title, description, start_date, due_date, status, user_owner) VALUES($1, $2, $3, $4, $5, $6)")
 
 	if err != nil {
 		return fmt.Errorf("error preparando consulta: %v", err)
@@ -39,13 +39,13 @@ func prepareInsertTask() error {
 }
 
 func prepareUpdateTask() error {
-	UpdateTask, err = Database.Prepare("UPDATE task SET title = ?, description = ?, due_date = ?, status = ? WHERE code = ? AND user_owner = ?")
+	UpdateTask, err = Database.Prepare("UPDATE task SET title = $1, description = $2, due_date = $3, status = $4 WHERE code = $5 AND user_owner = $6")
 
 	return err
 }
 
 func prepareDeleteTask() error {
-	DeleteTask, err = Database.Prepare("DELETE FROM task WHERE code = ? AND user_owner = ?")
+	DeleteTask, err = Database.Prepare("DELETE FROM task WHERE code = $1 AND user_owner = $2")
 
 	return err
 }

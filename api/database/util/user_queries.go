@@ -10,19 +10,19 @@ var SignUp *sql.Stmt
 var ValidateLogin *sql.Stmt
 
 func prepareGetUserStmt() error {
-	GetUser, err = Database.Prepare("SELECT first_name, last_name, email, password FROM user WHERE email = ?")
+	GetUser, err = Database.Prepare("SELECT first_name, last_name, email, password FROM user WHERE email = $1")
 
 	return err
 }
 
 func prepareSignUpStmt() error {
-	SignUp, err = Database.Prepare("INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)")
+	SignUp, err = Database.Prepare("INSERT INTO user (first_name, last_name, email, password) VALUES ($1, $2, $3, $4)")
 
 	return err
 }
 
 func prepareValidateLoginStmt() error {
-	ValidateLogin, err = Database.Prepare("SELECT password FROM user WHERE email = ?")
+	ValidateLogin, err = Database.Prepare("SELECT password FROM user WHERE email = $1")
 
 	return err
 }

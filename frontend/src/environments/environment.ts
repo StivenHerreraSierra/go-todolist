@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://d34c-201-185-225-21.ngrok.io'
+  apiUrl: 'http://localhost:8000'
 }
 /*
  * For easier debugging in development mode, you can import the following file

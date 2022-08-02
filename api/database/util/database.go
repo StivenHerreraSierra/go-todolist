@@ -5,42 +5,32 @@ import (
 	"log"
 	"os"
 
-	"github.com/go-sql-driver/mysql"
+	"github.com/lib/pq"
 	"github.com/joho/godotenv"
 )
 
 var Database *sql.DB
 var err error
-var db_conf *mysql.Config
-
-func config() error {
-	db_conf = mysql.NewConfig()
-
-	err := godotenv.Load()
-
-	if err != nil {
-		return err
-	}
-
-	db_conf.User = os.Getenv("DB_USER")
-	db_conf.Passwd = os.Getenv("DB_PASSWORD")
-	db_conf.Addr = os.Getenv("DB_ADDRESS")
-	db_conf.DBName = os.Getenv("DB_NAME")
-	db_conf.Net = "tcp"
-
-	return nil
-}
+a = *pq
 
 func connect() error {
-	Database, err = sql.Open("mysql", db_conf.FormatDSN())
+    err := godotenv.Load();
 
-	if err != nil {
-		return err
-	}
+    if err != nil {
+        return err
+    }
 
-	err = Database.Ping()
+    connStr := os.Getenv("DB_URL")
 
-	return err
+    Database, err = sql.Open("postgres", connStr)
+
+    if err != nil {
+        return err
+    }
+
+    err = Database.Ping()
+
+    return err
 }
 
 func init() {

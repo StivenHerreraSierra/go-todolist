@@ -260,14 +260,11 @@ body {
 .item__events:nth-last-child(1) {
   margin-right: 0;
 }
-.pendiente {
+.pending {
   background-color: var(--pending-color);
 }
-.finalizada {
+.finished {
   background-color: var(--finished-color);
-}
-.atrasada {
-  background-color: var(--late-color);
 }
 .descripcion {
   color: var(--unfocus-text);
