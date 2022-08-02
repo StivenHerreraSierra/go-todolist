@@ -5,13 +5,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/lib/pq"
+	_ "github.com/lib/pq"
 	"github.com/joho/godotenv"
 )
 
 var Database *sql.DB
 var err error
-a = *pq
 
 func connect() error {
     err := godotenv.Load();
@@ -34,13 +33,7 @@ func connect() error {
 }
 
 func init() {
-	err := config()
-
-	if err != nil {
-		log.Printf("[database config]: %q", err)
-	}
-
-	err = connect()
+	err := connect()
 
 	if err != nil {
 		log.Printf("[database connection]: %q", err)
